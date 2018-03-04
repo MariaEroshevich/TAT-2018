@@ -17,8 +17,8 @@ namespace task_DEV_2
         }
       }
       while (line == string.Empty);
-      EvenIndexesFinder finder = new EvenIndexesFinder();
-      Console.WriteLine("The string with even symbols: " + finder.FindEvenSymbols(line));
+      StringCreator creator = new StringCreator();
+      Console.WriteLine("The string with even symbols: " + creator.CreateEvenIndexesString(line));
     }
   }
 }
