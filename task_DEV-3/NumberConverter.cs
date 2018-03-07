@@ -26,6 +26,10 @@ namespace task_DEV_3
     /// <returns>Returns the reverse string with converted number.</returns>
     public string ConvertDecimalNumber()
     {
+      if (decimalNumber == 0)
+      {
+        convertedNumber.Append(0);
+      }
       while (decimalNumber > 0)
       {
         convertedNumber.Append(NOTATION_SYMBOLS[decimalNumber % notation]);
@@ -43,7 +47,7 @@ namespace task_DEV_3
 
     private void CheckInputFormat()
     {
-      if (notation < 2 || notation > 20 || decimalNumber <= 0)
+      if (notation < 2 || notation > 20 || decimalNumber < 0)
       {
         throw new ArgumentException("You entered wrong notation number or invaliable decimal number.");
       }
