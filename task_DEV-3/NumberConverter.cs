@@ -8,11 +8,11 @@ namespace task_DEV_3
   /// </summary>
   public class NumberConverter
   {
+    private const string NOTATION_SYMBOLS = "0123456789ABCDEFGHIJ";
     private int decimalNumber;
     private int notation;
     private StringBuilder convertedNumber = new StringBuilder();
-    private string notationSymbols = "0123456789ABCDEFGHIJ";
-
+    
     public NumberConverter(int decimalNumber, int notation)
     {
       this.decimalNumber = decimalNumber;
@@ -21,14 +21,14 @@ namespace task_DEV_3
     }
 
     /// <summary>
-    /// This method converts entered decimal number to the number from the new notation.
+    /// This method converts entered decimal number to the number from the new number system.
     /// </summary>
     /// <returns>Returns the reverse string with converted number.</returns>
     public string ConvertDecimalNumber()
     {
       while (decimalNumber > 0)
       {
-        convertedNumber.Append(notationSymbols[decimalNumber % notation]);
+        convertedNumber.Append(NOTATION_SYMBOLS[decimalNumber % notation]);
         decimalNumber = decimalNumber / notation;
       }
       return ReverseConvertedString();
