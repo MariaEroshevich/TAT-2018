@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace task_DEV_4
@@ -12,109 +9,81 @@ namespace task_DEV_4
   /// </summary>
   public class XMLParser
   {
-    private string pathXMLFile;
-    private string XMLFile;
+    private string movedNewLine = "\r\n";
+    private char equalSign = '=';
+    private char openedBreacket = '<';
+    private char closedBreacket = '>';
+    private char quote = '"';
+    private char space = ' ';
 
-    public XMLParser(string pathXMLFile)
-    {
-      this.pathXMLFile = pathXMLFile;
-    }
-    
     /// <summary>
-    /// This method parses XMLFIle.
+    /// This method reads XMLFile.
     /// </summary>
-    /// <returns>Returns XMLFiles nodes.</returns>
-    public Node ParseXMLFile()
+    /// <param name="pathXMLFile"> The path to the XMLFile.</param>
+    /// <returns>Returns the read file.</returns>
+    public string ReadXMLFile(string pathXMLFile)
     {
-      ReadXMLFile();
+      StreamReader reader = new StreamReader(pathXMLFile);
+      return reader.ReadToEnd().Replace(movedNewLine, "");
+    }
+
+    /// <summary>
+    /// This method parses XMLFile.
+    /// </summary>
+    /// <param name="XMLFile">Parsed file.</param>
+    /// <returns>Returns node with it's elements.</returns>
+    public Node ParseXMLFile(string XMLFile)
+    {
       Node node = new Node();
-      //node.Tag = GetTagName(XMLFile);
-      if (XMLFile.Contains('='))
+
+      if (GetElementsLine(XMLFile).Contains(equalSign))
       {
-        node.Atrubutes.Add(GetAtribute(XMLFile));
-        node.AtributeValue.Add(GetAtributeValue(XMLFile));
-        node.Tag = XMLFile.Substring(XMLFile.IndexOf('<') + 1, XMLFile.IndexOf(' ') - XMLFile.IndexOf('<') - 1);
+        node = GetElementsInTag(node, XMLFile);
       }
       else
       {
-        node.Tag = GetTagName(XMLFile);
+        node.Tag = GetElementsLine(XMLFile);
       }
-        string substring = XMLFile.Substring(XMLFile.IndexOf('>') + 1, XMLFile.IndexOf(GetClosedTag(XMLFile)) - XMLFile.IndexOf('>') - 1);
-      
-      if (!substring.Contains('<'))
+
+      string substring = XMLFile.Substring(XMLFile.IndexOf(closedBreacket) + 1, XMLFile.IndexOf(GetClosedTag(node.Tag)) - XMLFile.IndexOf(closedBreacket) - 1);
+
+      if (!substring.Contains(openedBreacket))
       {
         node.Value = substring;
       }
       else
       {
-        node.ChildrenNodes.Add(GetChildNode(substring));
+        while (substring.Length != 0)
+        {
+          Node childrenNode = ParseXMLFile(substring);
+          node.ChildrenNodes.Add(childrenNode);
+          substring = substring.Remove(0, substring.IndexOf(GetClosedTag(childrenNode.Tag)) + GetClosedTag(childrenNode.Tag).Length).Remove(0, substring.IndexOf(openedBreacket));
+        }
       }
       return node;
     }
 
-    private void ReadXMLFile()
+    private string GetElementsLine(string line)
     {
-      StreamReader reader = new StreamReader(pathXMLFile);
-      XMLFile = reader.ReadToEnd();
+      return line.Substring(line.IndexOf(openedBreacket) + 1, line.IndexOf(closedBreacket) - line.IndexOf(openedBreacket) - 1);
     }
 
-    private string GetTagName(string line)
-    {
-      string tagName = line.Substring(line.IndexOf('<') + 1, line.IndexOf('>') - line.IndexOf('<') - 1);
-      if (tagName.Contains('='))
-      {
-        tagName = line.Substring(line.IndexOf('<') + 1, line.IndexOf(' ') - line.IndexOf('<') - 1);
-      }
-      return tagName;
-    }
-
-    private string GetClosedTag(string line)
+    private string GetClosedTag(string tagName)
     {
       StringBuilder closedTag = new StringBuilder();
       closedTag.Append("</");
-      closedTag.Append(GetTagName(line));
-      closedTag.Append('>');
+      closedTag.Append(tagName);
+      closedTag.Append(closedBreacket);
       return closedTag.ToString();
     }
 
-    private Node GetChildNode(string line)
+    private Node GetElementsInTag(Node node, string XMLFile)
     {
-      Node childNode = new Node();
-      if (line.Contains('='))
-      {
-        childNode.Atrubutes.Add(GetAtribute(line));
-        childNode.AtributeValue.Add(GetAtributeValue(line));
-        childNode.Tag = line.Substring(line.IndexOf('<') + 1, line.IndexOf(' ') - line.IndexOf('<') - 1);
-      }
-      else
-      {
-        childNode.Tag = GetTagName(line);
-      }
-      string substring = line.Substring(line.IndexOf('>') + 1, line.IndexOf(GetClosedTag(line)) - line.IndexOf('>') - 1);
-      if (!substring.Contains('<'))
-      {
-        childNode.Value = substring;
-      }
-      else
-      {
-        childNode.ChildrenNodes.Add(GetChildNode(substring));
-      }
-      return childNode;
-    }
-
-    private string GetAtribute(string line)
-    {
-      /*Node node = new Node():
-      if (line.Contains('='))
-      {
-        node.Atrubutes.Add(line.Substring(line.IndexOf(' ') + 1, line.IndexOf('=') - line.IndexOf(' ') - 1));
-      }*/
-      return line.Substring(line.IndexOf(' ') + 1, line.IndexOf('=') - line.IndexOf(' ') - 1);
-    }
-
-    private string GetAtributeValue(string line)
-    {
-      return line.Substring(line.IndexOf('"') + 1, line.IndexOf('>') - line.IndexOf('"') - 2);
+      string substring = XMLFile.Substring(XMLFile.IndexOf(openedBreacket), XMLFile.Length - XMLFile.IndexOf(openedBreacket));
+      node.Tag = substring.Substring(substring.IndexOf(openedBreacket) + 1, substring.IndexOf(space) - substring.IndexOf(openedBreacket) - 1);
+      node.Atributes.Add(substring.Substring(substring.IndexOf(space) + 1, substring.IndexOf(equalSign) - substring.IndexOf(space) - 1));
+      node.AtributeValue.Add(substring.Substring(substring.IndexOf(quote) + 1, substring.IndexOf(closedBreacket) - substring.IndexOf(quote) - 2));
+      return node;
     }
   }
 }

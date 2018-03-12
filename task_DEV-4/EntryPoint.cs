@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace task_DEV_4
 {
-  class EntryPoint
+  public class EntryPoint
   {
     static void Main(string[] args)
     {
-      string XMLFile = "D:/task_DEV-4/task_DEV-4/example1.xml";
-      XMLParser parser = new XMLParser(XMLFile);
+      string pathXMLFile = args[0];
+      //string pathXMLFile = "D:/task_DEV-4/task_DEV-4/example.xml";
+      XMLParser parser = new XMLParser();
+      string XMLFile = parser.ReadXMLFile(pathXMLFile);
       Node node = new Node();
-      node = parser.ParseXMLFile();
+      node = parser.ParseXMLFile(XMLFile);
+      OutputNode outputNode = new OutputNode();
+      List<string> result = outputNode.PrintNode(node, XMLFile);
+      Console.WriteLine(result);
     }
   }
 }
