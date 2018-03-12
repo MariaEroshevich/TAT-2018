@@ -13,17 +13,17 @@ namespace task_DEV_4
   {
     private string tag;
     private string value;
-    private List<string> atributes = new List<string>();
-    private List<string> atributeValue = new List<string>();
+    private string attributes;
+    private string attributeValue;
     private List<Node> childrenNodes = new List<Node>();
 
     public string Tag { get { return tag; } set { tag = value;} }
 
     public string Value { get { return value; } set { this.value = value; } }
 
-    public List<string> Atributes { get { return atributes; } set { atributes = value; } }
+    public string Attributes { get { return attributes; } set { attributes = value; } }
 
-    public List<string> AtributeValue { get { return atributeValue; } set { atributeValue = value; } }
+    public string AttributeValue { get { return attributeValue; } set { attributeValue = value; } }
 
     public List<Node> ChildrenNodes { get { return childrenNodes; } set { childrenNodes = value; } }
   }

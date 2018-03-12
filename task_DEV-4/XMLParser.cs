@@ -77,14 +77,13 @@ namespace task_DEV_4
       return closedTag.ToString();
     }
 
-    private Node GetElementsInTag(Node node, string XMLFile)
+    private Node GetElementsInTag(Node node, string line)
     {
-      string substring = XMLFile.Substring(XMLFile.IndexOf(openedBreacket), XMLFile.Length - XMLFile.IndexOf(openedBreacket));
-      node.Tag = substring.Substring(substring.IndexOf(openedBreacket) + 1, substring.IndexOf(space) - substring.IndexOf(openedBreacket) - 1);
-      node.Atributes.Add(substring.Substring(substring.IndexOf(space) + 1, substring.IndexOf(equalSign) - substring.IndexOf(space) - 1));
-      node.AtributeValue.Add(substring.Substring(substring.IndexOf(quote) + 1, substring.IndexOf(closedBreacket) - substring.IndexOf(quote) - 2));
+      string substring = line.Substring(line.IndexOf(openedBreacket), line.Length - line.IndexOf(openedBreacket));
+      node.Attributes = line.Substring(line.IndexOf(space) + 1, line.IndexOf(equalSign) - line.IndexOf(space) - 1);
+      node.AttributeValue = line.Substring(line.IndexOf(quote) + 1, line.IndexOf(quote) - line.IndexOf(space) - 3);
+      node.Tag = line.Substring(line.IndexOf(openedBreacket) + 1, line.IndexOf(space) - line.IndexOf(openedBreacket) - 1);
       return node;
     }
   }
 }
-
