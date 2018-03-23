@@ -8,7 +8,7 @@ namespace task_DEV_6
   public class CounterAllProducts: ICommand
   {
     private List<Product> products = new List<Product>();
-
+    
     public CounterAllProducts(List<Product> products)
     {
       this.products = products;
