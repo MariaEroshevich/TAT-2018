@@ -18,7 +18,11 @@ namespace task_DEV_7
       this.fileName = fileName;
     }
 
-    private List<Car> ReadToObjectJson()
+    /// <summary>
+    /// This method reads json to object.
+    /// </summary>
+    /// <returns>Returns lidt of car.</returns>
+    public List<Car> ReadToObjectJson()
     {
       DataContractJsonSerializer serializer = new DataContractJsonSerializer(new List<Car>().GetType());
       using (FileStream fileStream = new FileStream(fileName, FileMode.OpenOrCreate))

@@ -29,7 +29,7 @@ namespace task_DEV_7
       CarCreate();
     }
 
-    private Car CarCreate()
+    public Car CarCreate()
     {
       return new Ford(model, bodyType, transmissionType, engineType, amount, power, climateControl, interiorType);
     }

@@ -3,7 +3,7 @@
 namespace task_DEV_7
 {
   /// <summary>
-  /// This class 
+  /// This class implements the car.
   /// </summary>
   [DataContract]
   public class Car

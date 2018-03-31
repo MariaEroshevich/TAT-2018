@@ -6,8 +6,6 @@ namespace task_DEV_7
   /// </summary>
   public class Ford: Car
   {
-    //private string mark = "Ford";
-
     public Ford(string model, string bodyType, string transmissionType, string engimeType, string amount,
       string power, string climateControl, string interiorType)
     {
