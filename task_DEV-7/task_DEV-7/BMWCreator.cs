@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace task_DEV_7
 {
   /// <summary>
@@ -11,7 +6,6 @@ namespace task_DEV_7
   /// </summary>
   public class BMWCreator: ICreator
   {
-    private string mark;
     private string model;
     private string bodyType;
     private string transmissionType;
@@ -21,10 +15,9 @@ namespace task_DEV_7
     private string climateControl;
     private string interiorType;
 
-    public BMWCreator(string mark, string model, string bodyType, string transmissionType, string engineType, string amount,
+    public BMWCreator(string model, string bodyType, string transmissionType, string engineType, string amount,
       string power, string climateControl, string interiorType)
     {
-      this.mark = mark;
       this.model = model;
       this.bodyType = bodyType;
       this.transmissionType = transmissionType;
@@ -33,15 +26,12 @@ namespace task_DEV_7
       this.power = power;
       this.climateControl = climateControl;
       this.interiorType = interiorType;
+      CarCreate();
     }
 
-    /// <summary>
-    /// This method creates BMW cars.
-    /// </summary>
-    /// <returns>Retruns object BMW.</returns>
-    public ICar CarCreate()
+    private Car CarCreate()
     {
-      return new BMW(mark, model, bodyType,transmissionType, engineType, amount, power, climateControl, interiorType);
+      return new BMW(model, bodyType,transmissionType, engineType, amount, power, climateControl, interiorType);
     }
   }
 }

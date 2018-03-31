@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -45,16 +48,17 @@
   <ItemGroup>
     <Compile Include="BMW.cs" />
     <Compile Include="BMWCreator.cs" />
-    <Compile Include="JsonReader.cs" />
+    <Compile Include="CreatorCarOfJson.cs" />
     <Compile Include="Ford.cs" />
     <Compile Include="FordCreator.cs" />
-    <Compile Include="ICar.cs" />
+    <Compile Include="Car.cs" />
     <Compile Include="ICreator.cs" />
     <Compile Include="EntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

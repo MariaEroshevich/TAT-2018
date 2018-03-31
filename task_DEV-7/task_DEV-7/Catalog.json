@@ -1,14 +1,21 @@
 [{
-"Mark": BMW
-"Model": M6
-"Body type": coupe
-"Transmission type": automatic
-"Engine type": petrol
-"Interior type": leather
-},{
-"Mark": Ford
-"Model": Fiesta
-"Body type": sedan
-"Transmission type": automatic
-"Engine type": petrol
+"Mark":"BMW",
+"Model":"M6",
+"BodyType":"coupe",
+"TransmissionType":"automatic",
+"EngineType":"petrol",
+"Amount":"2.0",
+"Power":"105",
+"ClimateControl":"Climate Control",
+"InteriorType":"leather"
+}, {
+"Mark":"Ford",
+"Model":"Trend",
+"BodyType":"coupe",
+"TransmissionType":"automatic",
+"EngineType":"petrol",
+"Amount":"1.6",
+"Power":"105",
+"ClimateControl":"Climate control",
+"InteriorType":"leather"
 }]
