@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace task_DEV_8
 {
@@ -48,16 +49,25 @@ namespace task_DEV_8
     /// <returns></returns>
     public string SearchPopularFemaleFirstName()
     {
-      string popularFemaleName;
+      StringBuilder popularFemaleName = new StringBuilder();
+      int count = 0;
+      int maxNumberTheSameNames = 0;
       users = SortUsersByFirstName();
       for (int i = 0; i < users.Count - 1; i++)
       {
         if (users[i].FirstName.Equals(users[i + 1].FirstName) && users[i].Sex.Equals("woman") && users[i + 1].Sex.Equals("woman"))
         {
-          popularFemaleName = users[i].FirstName;
+          count++;
+        }
+        if (count > maxNumberTheSameNames)
+        {
+          maxNumberTheSameNames = count;
+          popularFemaleName.Clear();
+          popularFemaleName.Append(users[i].FirstName);
+          count = 0;
         }
       }
-      return popularFemaleName;
+      return popularFemaleName.ToString();
     }
 
     private List<User> SortUsersByFirstName()

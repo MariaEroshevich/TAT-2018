@@ -8,12 +8,7 @@ namespace task_DEV_8
     static void Main(string[] args)
     {
       Input input = new Input();
-      //List<User> users = input.EnterUseresInformation();
-      List<User> users = new List<User>();
-      users.Add(new User("Maria", "Eroshevich", "woman", 21));
-      users.Add(new User("Anna", "Den", "woman", 20));
-      users.Add(new User("Maria", "Kil", "woman", 20));
-      users.Add(new User("Kolya", "Kil", "man", 15));
+      List<User> users = input.EnterUseresInformation();
       Reciever reciever = new Reciever(users);
       AverageAge averageAge = new AverageAge(reciever);
       averageAge.Execute();

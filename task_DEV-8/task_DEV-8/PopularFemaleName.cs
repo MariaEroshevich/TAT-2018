@@ -18,7 +18,7 @@ namespace task_DEV_8
     /// </summary>
     public void Execute()
     {
-      //reciever.SearchPopularFemaleName();
+      reciever.SearchPopularFemaleFirstName();
     }
   }
 }
